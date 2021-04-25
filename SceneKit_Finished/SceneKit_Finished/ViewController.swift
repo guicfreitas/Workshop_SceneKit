@@ -58,7 +58,7 @@ class ViewController: UIViewController {
         //Definindo se o usuario pode fazer gestos de translacao
         sceneView.cameraControlConfiguration.allowsTranslation = false
         
-        // Set scene settings
+        // Adicionando as configuracoes na cena
         sceneView.scene = scene
         
         
