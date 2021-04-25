@@ -58,6 +58,13 @@ class ViewController: UIViewController {
         //Definindo se o usuario pode fazer gestos de translacao
         sceneView.cameraControlConfiguration.allowsTranslation = false
         
+        //Adicionando as animacões
+        let node = scene?.rootNode
+        let rotateOne = SCNAction.rotateBy(x: 0, y: CGFloat(Float.pi), z: 0, duration: 5.0)
+        let rotateAndHover = SCNAction.group([rotateOne])
+        let repeatForever = SCNAction.repeatForever(rotateAndHover)
+        node?.runAction(repeatForever)
+        
         // Adicionando as configuracoes na cena
         sceneView.scene = scene
         
