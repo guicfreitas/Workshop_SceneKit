@@ -19,13 +19,13 @@ class ViewController: UIViewController {
         
         // 1: Carregando o modelo
         let scene = SCNScene(named: "watchC_planet07.dae")
-        sceneView.scene = scene
+        
         
         // 2: Adicionando a node da camera
         let cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
         // 3: Posicionando a camera
-        cameraNode.position = SCNVector3(x: 0, y: 10, z: 35)
+        cameraNode.position = SCNVector3(x: 0.0, y: 0.5, z: 8)
         // 4: Colocando a camera na cena
         scene?.rootNode.addChildNode(cameraNode)
         
@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         let lightNode = SCNNode()
         lightNode.light = SCNLight()
         lightNode.light?.type = .omni
-        lightNode.position = SCNVector3(x: 0, y: 10, z: 35)
+        lightNode.position = SCNVector3(x: 0, y: 10, z: 8)
         scene?.rootNode.addChildNode(lightNode)
         
         // 6: Adicionando Ambilight a cena
@@ -59,11 +59,14 @@ class ViewController: UIViewController {
         sceneView.cameraControlConfiguration.allowsTranslation = false
         
         //Adicionando as animacões
-        let node = scene?.rootNode
+        
         let rotateOne = SCNAction.rotateBy(x: 0, y: CGFloat(Float.pi), z: 0, duration: 5.0)
-        let rotateAndHover = SCNAction.group([rotateOne])
+        let hoverUp = SCNAction.moveBy(x: 0, y: 0.2, z: 0, duration: 2.5)
+        let hoverDown = SCNAction.moveBy(x: 0, y: -0.2, z: 0, duration: 2.5)
+        let hoverSequence = SCNAction.sequence([hoverUp, hoverDown])
+        let rotateAndHover = SCNAction.group([rotateOne, hoverSequence])
         let repeatForever = SCNAction.repeatForever(rotateAndHover)
-        node?.runAction(repeatForever)
+        scene?.rootNode.runAction(repeatForever)
         
         // Adicionando as configuracoes na cena
         sceneView.scene = scene
